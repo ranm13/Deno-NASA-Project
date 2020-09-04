@@ -49,7 +49,7 @@ async function loadPlanetsData():Promise<Array<Planet>>{
 }
 
 planets = await loadPlanetsData();
-console.log(`${planets.length} habitable planets found!`);
+log.info(`${planets.length} habitable planets found!`);
 
 export function getAllPlanets():Array<Planet>{
     return planets;
