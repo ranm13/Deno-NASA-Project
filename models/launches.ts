@@ -1,7 +1,7 @@
 import * as log from "https://deno.land/std/log/mod.ts";
 import * as _ from "https://raw.githubusercontent.com/lodash/lodash/4.17.15-es/lodash.js";
 
-interface Launch{
+export interface Launch{
     flightNumber: number;
     mission: string;
     rocket: string;
@@ -59,4 +59,12 @@ export function getOne(id: number){
         return launches.get(id);
     }
     return null;
+}
+
+export function addOne(data: Launch){
+    launches.set(data.flightNumber, 
+        {...data,
+         upcoming: true,
+         customers: ["ZTM", "NASA"]
+        });
 }

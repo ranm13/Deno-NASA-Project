@@ -1,6 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import * as planets from "./models/planets.ts";
 import * as launches from "./models/launches.ts";
+import { Launch } from "./models/launches.ts";
 
 const router = new Router();
 
@@ -35,4 +36,15 @@ router.get("/launches/:id", ctx => {
     }
 });
 
+router.post("/launches", async (ctx) => {
+    const body = await ctx.request.body();
+    const data: unknown = body.value;
+    
+    launches.addOne(data as Launch);
+
+    ctx.response.body = {success: true};
+    ctx.response.status = 201;
+
+
+});
  export default router;
