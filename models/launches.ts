@@ -43,3 +43,20 @@ async function downloadLaunchData(){
     }
 
 }
+
+if(!import.meta.main){
+    await downloadLaunchData();
+    log.info(JSON.stringify(import.meta));
+    log.info(`Downloading data for ${launches.size} SpaceX launches`);
+}
+
+export function getAll(){
+    return Array.from(launches.values());
+}
+
+export function getOne(id: number){
+    if(launches.has(id)){
+        return launches.get(id);
+    }
+    return null;
+}
