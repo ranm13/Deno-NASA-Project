@@ -6,6 +6,10 @@ interface Launch{
     mission: string;
     rocket: string;
     customers: Array<string>;
+    launchDate: number;
+    upcoming: boolean;
+    success?: boolean;
+    target?: string;
 }
 const launches = new Map<number, Launch>();
 
@@ -28,6 +32,9 @@ async function downloadLaunchData(){
             flightNumber: launch["flight_number"],
             mission: launch["mission_name"],
             rocket: launch["rocket"]["rocket_name"],
+            launchDate:  launch["launch_date_unix"],
+            upcoming: launch["upcoming"],
+            success: launch["launch_success"],
             customers: customers
         }
 
