@@ -21,6 +21,7 @@ function loadLaunches() {
       launches = fetchedLaunches.sort((a,b) => {
         return a.flightNumber < b.flightNumber;
       })
+      .filter(a => a.flightNumber)
     })
     .catch(err => console.error(err));
 }
@@ -47,27 +48,25 @@ function submitLaunch() {
   const launchDate = new Date(document.getElementById("launch-day").value);
   const mission = document.getElementById("mission-name").value;
   const rocket = document.getElementById("rocket-name").value;
-  const flightNumber = launches[launches.length - 1].flightNumber + 1;
+  const flightNumber = parseInt(launches[launches.length - 1].flightNumber) + 1;
 
-  return fetch("/lanuches",
-    {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        launchDate: Math.floor(launchDate/1000),
-        flightNumber,
-        mission,
-        rocket,
-        target
-
-      })
-    }
-  )
-    .then(() => document.getElementById("launch-success").hidden = false)
+  return fetch("/launches", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      launchDate: Math.floor(launchDate / 1000),
+      flightNumber,
+      mission,
+      rocket,
+      target,
+    })
+  })
+    .then(() => {
+      document.getElementById("launch-success").hidden = false;
+    })
     .then(loadLaunches);
-
 }
 
 function listUpcoming() {

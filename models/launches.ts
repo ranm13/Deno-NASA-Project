@@ -61,10 +61,13 @@ export function getOne(id: number){
     return null;
 }
 
-export function addOne(data: Launch){
-    launches.set(data.flightNumber, 
-        {...data,
-         upcoming: true,
-         customers: ["ZTM", "NASA"]
-        });
-}
+export function addOne(data: Launch) {
+    let nextLaunch: Launch =  Object.assign(data, {
+        upcoming: true,
+        customers: ["Zero to Mastery", "NASA"],
+      });
+    launches.set(
+      data.flightNumber,
+      nextLaunch
+    );
+  }
