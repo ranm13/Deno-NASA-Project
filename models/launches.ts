@@ -61,6 +61,19 @@ export function getOne(id: number){
     return null;
 }
 
+export function removeOne(id: number){
+    if(launches.has(id)){
+        const abortedLaunch = launches.get(id);
+        if(abortedLaunch){
+            abortedLaunch.upcoming = false;
+            abortedLaunch.success = false;
+        }
+        return abortedLaunch;
+    }
+    return null;
+}
+
+
 export function addOne(data: Launch) {
     let nextLaunch: Launch =  Object.assign(data, {
         upcoming: true,
