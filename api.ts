@@ -1,4 +1,4 @@
-import { Router, BodyType, BodyJson } from "https://deno.land/x/oak/mod.ts";
+import { Router } from "./deps.ts";
 import * as planets from "./models/planets.ts";
 import * as launches from "./models/launches.ts";
 import { Launch } from "./models/launches.ts";

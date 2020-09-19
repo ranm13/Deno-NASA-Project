@@ -1,5 +1,4 @@
-import * as log from "https://deno.land/std/log/mod.ts";
-import * as _ from "https://raw.githubusercontent.com/lodash/lodash/4.17.15-es/lodash.js";
+import {log, flatMap } from "../deps.ts";
 
 export interface Launch{
     flightNumber: number;
@@ -27,7 +26,7 @@ async function downloadLaunchData(){
     const launchData = await response.json();
     for(const launch of launchData){
         const payloads = launch["rocket"]["second_stage"]["payloads"]
-        const customers = _.flatMap(payloads, (payload:any) => payload["customers"]);
+        const customers = flatMap(payloads, (payload:any) => payload["customers"]);
         const flightData = {
             flightNumber: launch["flight_number"],
             mission: launch["mission_name"],

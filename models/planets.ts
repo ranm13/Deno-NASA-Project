@@ -1,8 +1,4 @@
-import { join } from "https://deno.land/std/path/mod.ts";
-import { BufReader } from "https://deno.land/std/io/mod.ts";
-import { parse } from "https://deno.land/std/encoding/csv.ts";
-import * as log from "https://deno.land/std/log/mod.ts";
-import * as _ from "https://raw.githubusercontent.com/lodash/lodash/4.17.15-es/lodash.js";
+import { join, BufReader, parse, log, pick } from "../deps.ts";
 
 interface Planet {
     [ key: string ] : string
@@ -37,7 +33,7 @@ async function loadPlanetsData():Promise<Array<Planet>>{
     const planets:Array<Planet> = filterHabitablePlanets(result);
 
     return planets.map(planet => {
-        return (_.pick(planet, [
+        return (pick(planet, [
             "koi_prad", 
             "koi_smass", 
             "koi_srad",
