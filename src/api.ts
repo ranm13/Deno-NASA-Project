@@ -1,7 +1,7 @@
 import { Router } from "./deps.ts";
-import * as planets from "./models/planets.ts";
-import * as launches from "./models/launches.ts";
-import { Launch } from "./models/launches.ts";
+import * as planets from "../models/planets.ts";
+import * as launches from "../models/launches.ts";
+import { Launch } from "../models/launches.ts";
 
 const router = new Router();
 

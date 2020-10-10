@@ -1,4 +1,4 @@
-import { join, BufReader, parse, log, pick } from "../deps.ts";
+import { join, BufReader, parse, log, pick } from "../src/deps.ts";
 
 interface Planet {
     [ key: string ] : string
@@ -23,15 +23,11 @@ async function loadPlanetsData():Promise<Array<Planet>>{
     const path:string = join("data", "kepler_exoplanets_nasa.csv")
     const file:Deno.File = await Deno.open(path);
     const bufReader = new BufReader(file);
-    const result = await parse(bufReader, {
-        header: true,
-        comment: "#"
-    }) as Array<Planet>;
+    const result = await parse(bufReader, { header: true, comment: "#"}) as Array<Planet>;
 
     Deno.close(file.rid);
-
+    
     const planets:Array<Planet> = filterHabitablePlanets(result);
-
     return planets.map(planet => {
         return (pick(planet, [
             "koi_prad", 
@@ -45,9 +41,11 @@ async function loadPlanetsData():Promise<Array<Planet>>{
 
 }
 
+
 planets = await loadPlanetsData();
 log.info(`${planets.length} habitable planets found!`);
 
 export function getAllPlanets():Array<Planet>{
+    log.info(planets);
     return planets;
 }

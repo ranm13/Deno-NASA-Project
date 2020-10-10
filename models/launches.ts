@@ -1,4 +1,4 @@
-import {log, flatMap } from "../deps.ts";
+import {log, flatMap } from "../src/deps.ts";
 
 export interface Launch{
     flightNumber: number;
@@ -38,7 +38,7 @@ async function downloadLaunchData(){
         }
 
         launches.set(flightData.flightNumber, flightData);
-        log.info(JSON.stringify(flightData));
+        // log.info(JSON.stringify(flightData));
     }
 
 }
